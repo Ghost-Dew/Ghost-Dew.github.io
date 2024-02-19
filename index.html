@@ -18,9 +18,12 @@
         </style>
 </head>
     <body>
-        <audio id="backgroundAudio" autoplay loop>
-            <source src="music/love.mp3" type="audio/mp3">
-        </audio>  
+        <!-- 音频播放器 -->  
+        <audio id="backgroundAudio" src="music/love.mp3" preload="auto"></audio>  
+  
+        <!-- 控制按钮 -->  
+        <button id="playButton">播放音乐</button>  
+        <button id="pauseButton" disabled>暂停音乐</button> 
         <div id="main">
              <div id="wrap">
                 <div id="text">
@@ -209,11 +212,32 @@
 
         runAsync().start();
     })();
-    // 获取音频元素  
+    // 获取音频元素和控制按钮  
     var audio = document.getElementById('backgroundAudio');  
+    var playButton = document.getElementById('playButton');  
+    var pauseButton = document.getElementById('pauseButton');  
   
     // 播放音乐  
-    audio.play();  
+    playButton.addEventListener('click', function() {  
+        audio.play()  
+            .then(() => {  
+                // 播放成功，启用暂停按钮  
+                pauseButton.disabled = false;  
+                playButton.disabled = true;  
+            })  
+            .catch(error => {  
+                // 播放失败，显示错误消息  
+                console.error('播放音乐时出错: ' + error.message);  
+            });  
+    });  
+  
+    // 暂停音乐  
+    pauseButton.addEventListener('click', function() {  
+        audio.pause();  
+        // 禁用暂停按钮，启用播放按钮  
+        pauseButton.disabled = true;  
+        playButton.disabled = false;  
+    });    
     </script>
 
     </body></html>
