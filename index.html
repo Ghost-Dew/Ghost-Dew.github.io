@@ -18,9 +18,9 @@
         </style>
 </head>
     <body>
-      <audio autoplay="autoplay">
-          <source src="music/love.mp3" type="audio/mp3" />
-      </audio>  
+        <audio id="backgroundAudio" autoplay loop>
+            <source src="music/love.mp3" type="audio/mp3">
+        </audio>  
         <div id="main">
              <div id="wrap">
                 <div id="text">
@@ -209,6 +209,11 @@
 
         runAsync().start();
     })();
+    // 获取音频元素  
+    var audio = document.getElementById('backgroundAudio');  
+  
+    // 播放音乐  
+    audio.play();  
     </script>
 
     </body></html>
